@@ -11,7 +11,7 @@ public class PostController {
         @GetMapping(path = "/posts")
         @ResponseBody
         public String posts() {
-            return "Posts Index Page";
+            return "index";
         }
 
         @GetMapping(path = "/posts/{id}")

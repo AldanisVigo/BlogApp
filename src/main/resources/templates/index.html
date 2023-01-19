@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Posts</title>
 </head>
 <body>
-    Posts Index Page
+    <th:block th:replace="~{/fragments/navbar.html :: navbar}"/>
+    You can type anything
+    <th:block th:replace="~{/fragments/footer.html :: footer}"/>
 </body>
 </html>
