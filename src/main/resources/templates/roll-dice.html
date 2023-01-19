@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Roll Dice Results</title>
+</head>
+<body>
+  You guessed the number <th:span th:text="${guess}"></th:span><br/>
+  We rolled the number <th:span th:text="${roll}"></th:span><br/>
+  You guessed <th:span th:text="${roll == guess ? 'Correctly' : 'Incorrectly'}"></th:span>
+</body>
+</html>
