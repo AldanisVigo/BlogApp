@@ -1,17 +1,32 @@
 package com.codeup.blogappjavacohort.controllers;
 
+import com.codeup.blogappjavacohort.models.Post;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class PostController {
         @GetMapping(path = "/posts")
-        @ResponseBody
-        public String posts() {
-            return "index";
+        public String posts(Model model) {
+            List<Post> twoPosts = new ArrayList<>(){{
+                add(new Post("Test Post One","This is test post one."));
+                add(new Post("Test Post Two", "This is test post two."));
+            }};
+
+            model.addAttribute("posts",twoPosts);
+
+            return "posts/index";
+        }
+
+        @GetMapping(path = "/posts/show")
+        public String showPost(Model model,@RequestParam("post_id") long postId) {
+            Post myPost = new Post("Test title","test body");
+            model.addAttribute("post",myPost);
+            return "posts/show";
         }
 
         @GetMapping(path = "/posts/{id}")

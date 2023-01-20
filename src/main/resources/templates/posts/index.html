@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<th:block th:replace="~{/fragments/navbar.html :: navbar}"/>
+    <th:block th:each="post : ${posts}">
+        <h2 th:text="post.title"></h2>
+        <div th:text="post.description"></div>
+        Hello world,
+        I just type something and wait some time and wallah.
+        I just type code
+    </th:block>
+<th:block th:replace="~{/fragments/footer.html :: footer}"/>
+</body>
+</html>
