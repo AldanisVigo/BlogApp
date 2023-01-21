@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class PostController {
@@ -54,10 +55,12 @@ public class PostController {
             @RequestParam("title") String title,
             @RequestParam("content") String content,
             HttpServletRequest req) {
-        postRepository.save(new Post(
-                title,content,
-                (User) req.getSession().getAttribute("user")
-        ));
+        Optional<User> firstUser = userRepository.findById(0L);
+        //TODO: Get the user from the session
+        firstUser.ifPresent(user -> postRepository.save(new Post(
+                title, content,
+                user
+        )));
         return "redirect:/posts";
     }
 }
