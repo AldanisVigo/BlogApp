@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create</title>
+    <th:block th:replace="~{fragments/header.html :: header}"/>
+</head>
+<body>
+    <th:block th:replace="~{fragments/navbar.html :: navbar}"/>
+    <form action="/posts/create" method="post">
+        <p>
+            <label for="title">Post Title</label>
+            <input type="text" name="title" id="title" placeholder="Post Title">
+        </p>
+        <p>
+            <label for="content">Post Contents</label>
+            <textarea name="content" id="content" placeholder="Post contents here..."></textarea>
+        </p>
+        <p>
+            <button type="submit">Post</button>
+        </p>
+    </form>
+</body>
+</html>

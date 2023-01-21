@@ -1,7 +1,7 @@
 package com.codeup.blogappjavacohort.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Generated;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,26 +12,21 @@ import java.io.Serializable;
 @Setter
 @Getter
 @NoArgsConstructor
+@Table(name="posts")
 public class Post implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String title;
 
-    private String body;
+    private String content;
 
     public Post(String title, String body){
         this.title = title;
-        this.body = body;
+        this.content = body;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;
@@ -41,11 +36,11 @@ public class Post implements Serializable {
         this.title = title;
     }
 
-    public String getBody() {
-        return body;
+    public String getContent() {
+        return content;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public void setContent(String content) {
+        this.content = content;
     }
 }
