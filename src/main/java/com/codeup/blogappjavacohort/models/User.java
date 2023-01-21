@@ -1,22 +1,21 @@
 package com.codeup.blogappjavacohort.models;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.Serializable;
+import java.util.List;
 
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-
-public class User implements Serializable {
+@Table(name = "users")
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,5 +26,8 @@ public class User implements Serializable {
 
     @NotNull
     private String password;
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "owner")
+    List<Post> posts;
 
 }
