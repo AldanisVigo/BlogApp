@@ -3,6 +3,7 @@ package com.codeup.blogappjavacohort.controllers;
 import com.codeup.blogappjavacohort.models.Post;
 import com.codeup.blogappjavacohort.models.User;
 import com.codeup.blogappjavacohort.repositories.PostRepository;
+import com.codeup.blogappjavacohort.repositories.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,9 @@ public class PostController {
 
     @Autowired
     PostRepository postRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     @GetMapping(path = "/posts")
     public String posts(Model model) {
