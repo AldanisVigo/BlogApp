@@ -28,21 +28,13 @@ public class PostController {
         return "posts/index";
     }
 
-    @GetMapping(path = "/posts/show")
-    public String showPost(Model model, @RequestParam("post_id") long postId, HttpServletRequest req) {
-        Post myPost = new Post(
-                "Test title",
-                "test body",
-                (User) req.getSession().getAttribute("user")
-        );
-        model.addAttribute("post", myPost);
-        return "posts/show";
-    }
 
-    @GetMapping(path = "/posts/{id}")
-    @ResponseBody
-    public String post(@PathVariable("id") Integer post_id) {
-        return "Viewing single post with id " + post_id;
+    @GetMapping(path = "/posts/show")
+    public String displayPosts(@RequestParam long postid, Model model){
+        System.out.println("postid = " + postid);
+        Post post = postRepository.findById(postid).get();
+        model.addAttribute("post",post);
+        return "/posts/show";
     }
 
     @GetMapping(path = "/posts/create")
@@ -55,7 +47,7 @@ public class PostController {
             @RequestParam("title") String title,
             @RequestParam("content") String content,
             HttpServletRequest req) {
-        Optional<User> firstUser = userRepository.findById(0L);
+        Optional<User> firstUser = userRepository.findById(1L);
         //TODO: Get the user from the session
         firstUser.ifPresent(user -> postRepository.save(new Post(
                 title, content,

@@ -1,13 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <th:block th:object="${post}">
+        <title th:text="${post.title}"></title>
+    </th:block>
+    <th:block th:replace="~{fragments/header.html :: header}"/>
 </head>
 <body>
-    <th:block>
+    <th:block th:replace="~{/fragments/navbar.html :: navbar}"/>
+    <th:block th:object="${post}">
         <th:span th:text="${post.title}"></th:span>
-        <th:span th:text="${post.description}"></th:span>
+        <th:span th:text="${post.content}"></th:span>
+        <th:span th:text="${post.owner.email}"></th:span>
     </th:block>
 </body>
 </html>

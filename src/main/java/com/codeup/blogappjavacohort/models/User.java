@@ -21,11 +21,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotNull
     private String username;
 
-    @NotNull
     private String password;
+
+    private String email;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "owner")
     List<Post> posts;
