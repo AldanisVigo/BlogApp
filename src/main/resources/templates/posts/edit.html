@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Post</title>
+    <th:block th:replace="~{/fragments/header.html :: header}"/>
+</head>
+<body>
+    <th:block th:replace="~{/fragments/navbar.html :: navbar}"/>
+    <form action="/posts/edit" method="post" th:object="${post}">
+        <input type="hidden" name="id" th:value="*{id}" th:field="*{id}"/>
+        <input type="hidden" name="owner" th:value="*{owner}" th:field="*{owner}"/>
+        <p>
+            <label for="title">Title:
+                <br/>
+                <input type="text" name="title" id="title" th:field="*{title}"/>
+            </label>
+        </p>
+        <p>
+            <label for="content">Content:
+                <br/>
+                <textarea rows="10" type="text" name="content" id="content" th:field="*{content}"></textarea>
+            </label>
+        </p>
+        <p>
+            <input type="submit" value="Work Work"/>
+        </p>
+    </form>
+</body>
+</html>

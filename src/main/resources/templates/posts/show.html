@@ -10,10 +10,15 @@
 </head>
 <body>
     <th:block th:replace="~{/fragments/navbar.html :: navbar}"/>
-    <th:block th:object="${post}">
-        <th:span th:text="${post.title}"></th:span>
-        <th:span th:text="${post.content}"></th:span>
-        <th:span th:text="${post.owner.email}"></th:span>
-    </th:block>
+        <div  th:object="${post}">
+            <h1 th:text="*{title}"></h1>
+            <br />
+            <th:block th:text="*{content}"></th:block>
+            <br />
+            Posted by:
+            <th:block th:text="*{owner.email}"></th:block>
+            <br/>
+            <a th:href="*{id} + '/edit'">Edit Post</a>
+        </div>
 </body>
 </html>

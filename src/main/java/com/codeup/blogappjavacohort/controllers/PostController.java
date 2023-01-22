@@ -55,4 +55,17 @@ public class PostController {
         )));
         return "redirect:/posts";
     }
+
+    @GetMapping(path = "/posts/{postid}/edit")
+    public String editPost(@PathVariable("postid") long postid,Model model){
+        Optional<Post> selectedPost = postRepository.findById(postid);
+        model.addAttribute("post",selectedPost.get());
+        return "posts/edit";
+    }
+
+    @PostMapping(path = "/posts/edit")
+    public String editPostPost(@ModelAttribute Post post,Model model){
+        postRepository.save(post);
+        return "redirect:/posts";
+    }
 }
