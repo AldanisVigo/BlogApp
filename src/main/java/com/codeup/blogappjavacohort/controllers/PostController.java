@@ -47,6 +47,9 @@ public class PostController {
             @RequestParam("title") String title,
             @RequestParam("content") String content,
             HttpServletRequest req) {
+        System.out.println("POST REQUEST RECEIVED: createPost");
+        System.out.println("New Post Title: " + title);
+        System.out.println("New Post Content: " + content);
         Optional<User> firstUser = userRepository.findById(1L);
         //TODO: Get the user from the session
         firstUser.ifPresent(user -> postRepository.save(new Post(
@@ -64,7 +67,8 @@ public class PostController {
     }
 
     @PostMapping(path = "/posts/edit")
-    public String editPostPost(@ModelAttribute Post post,Model model){
+    public String editPostPost(@ModelAttribute Post post){
+        System.out.println("I am getting hit.");
         postRepository.save(post);
         return "redirect:/posts";
     }

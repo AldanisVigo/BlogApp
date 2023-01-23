@@ -2,8 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <nav th:fragment="navbar" class="navbar bg-body-tertiary">
-      <div class="container-fluid">
+    <div class="container-fluid">
         <a class="navbar-brand" href="#">Vigo's Blog App</a>
-      </div>
-    </nav>
+    </div>
+    <form th:action="@{/logout}" th:method="post">
+        <button class="btn-link btn" style="margin-top: 8px">Logout</button>
+    </form>
+</nav>
 </html>

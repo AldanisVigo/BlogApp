@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <th:block th:replace="~{fragments/header.html :: header}"/>
+</head>
+<body>
+    <th:block th:replace="~{/fragments/navbar.html :: navbar}"/>
+    <form th:action="@{/sign-up}" method="POST" th:object="${user}">
+        <label for="username">Username</label>
+        <input id="username" th:field="*{username}" />
+
+        <label for="email">Email</label>
+        <input id="email" th:field="*{email}" />
+
+        <label for="password">Password</label>
+        <input id="password" type="password" th:field="*{password}" />
+
+        <input value="Sign me up!" type="submit" />
+    </form>
+    <th:block th:replace="~{/fragments/footer.html :: footer}"/>
+</body>
+</html>
