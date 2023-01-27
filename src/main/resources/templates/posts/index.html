@@ -21,6 +21,21 @@
             <div th:text="${post.content}"></div>
         </form>
     </th:block>
+    <th:block>
+        <span th:text="${pageNumber}"/>
+        <span th:text="${pageSize}"/>
+        <span th:text="${offset}"/>
+        <span th:text="${totalPages}"/>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li th:if="${pageNumber != 0}" class="page-item"><a rel=".prev" th:href="@{/posts(size=${pageSize}, page=${pageNumber - 1})}" class="page-link" href="#">Previous</a></li>
+                <li class="page-item" th:each="pageNum : ${pageNumbers}">
+                    <a th:class="${pageNum==pageNumber + 1 ? 'active page-link' : 'page-link'}" th:href="@{/posts(size=${pageSize}, page=${pageNum - 1})}" th:text="${pageNum}"/>
+                </li>
+                <li th:if="${pageNumber != totalPages - 1}" class="page-item"><a rel=".next" th:href="@{/posts(size=${pageSize}, page=${pageNumber + 1})}"  class="page-link">Next</a></li>
+            </ul>
+        </nav>
+    </th:block>
 <th:block th:replace="~{/fragments/footer.html :: footer}"/>
 </body>
 </html>

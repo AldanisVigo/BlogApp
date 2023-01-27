@@ -5,17 +5,23 @@ import com.codeup.blogappjavacohort.models.User;
 import com.codeup.blogappjavacohort.repositories.PostRepository;
 import com.codeup.blogappjavacohort.repositories.UserRepository;
 import com.codeup.blogappjavacohort.services.EmailService;
+import com.codeup.blogappjavacohort.services.PostService;
+import com.codeup.blogappjavacohort.services.PostServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 //import org.springframework.boot.actuate.endpoint.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-
-import static org.springframework.security.core.context.SecurityContextHolder.getContext;
 
 @Controller
 public class PostController {
@@ -29,10 +35,23 @@ public class PostController {
     @Autowired
     UserRepository userRepository;
 
+
     @GetMapping(path = "/posts")
-    public String posts(Model model) {
-        List<Post> posts = postRepository.findAll().stream().toList();
-        model.addAttribute("posts", posts);
+    public String posts(Model model, @PageableDefault(sort = { }, value = 2) Pageable pageable) {
+        PostService postService = new PostServiceImpl(postRepository);
+        System.out.println(pageable.getOffset());
+        System.out.println(pageable.getPageSize());
+        System.out.println(pageable.getPageNumber());
+        Page currentPage = postService.findAll(pageable);
+        model.addAttribute("totalPages",currentPage.getTotalPages());
+        model.addAttribute("posts",currentPage);
+        model.addAttribute("offset",pageable.getOffset());
+        model.addAttribute("pageSize",pageable.getPageSize());
+        model.addAttribute("pageNumber",pageable.getPageNumber());
+        List<Integer> pageNumbers = IntStream.rangeClosed(1, currentPage.getTotalPages())
+                .boxed()
+                .collect(Collectors.toList());
+        model.addAttribute("pageNumbers",pageNumbers);
         return "posts/index";
     }
 
