@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<!--<html xmlns="http://www.w3.org/1999/xhtml"-->
+<!--      xmlns:th="http://www.thymeleaf.org"-->
+<!--      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">-->
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security6">
 <nav th:fragment="navbar" class="navbar bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Vigo's Blog App</a>
+        <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post" style="display: inline-block;">
+            <button sec:authorize="isAuthenticated()"  class="btn btn-primary" style="margin-top: 8px">Logout</button>
+        </form>
     </div>
-    <form th:action="@{/logout}" th:method="post">
-        <button class="btn-link btn" style="margin-top: 8px">Logout</button>
-    </form>
 </nav>
 </html>

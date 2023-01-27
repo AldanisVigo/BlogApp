@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Edit Post</title>
@@ -7,24 +8,33 @@
 </head>
 <body>
     <th:block th:replace="~{/fragments/navbar.html :: navbar}"/>
-    <form action="/posts/edit" method="post" th:object="${post}">
-        <input type="hidden" name="id" th:value="*{id}" th:field="*{id}"/>
-        <input type="hidden" name="owner" th:value="*{owner}" th:field="*{owner}"/>
-        <p>
-            <label for="title">Title:
-                <br/>
-                <input type="text" name="title" id="title" th:field="*{title}"/>
-            </label>
-        </p>
-        <p>
-            <label for="content">Content:
-                <br/>
-                <textarea rows="10" type="text" name="content" id="content" th:field="*{content}"></textarea>
-            </label>
-        </p>
-        <p>
-            <input type="submit" value="Work Work"/>
-        </p>
-    </form>
+    <div class="container">
+        <form th:action="@{/posts/edit}" th:method="POST" th:object="${post}">
+            <input type="hidden" name="id" th:field="*{id}"/>
+            <input type="hidden" name="owner" th:field="*{owner}"/>
+            <p class="form-group">
+                <label for="title">Title:
+                    <br/>
+                    <input class="form-control" type="text" name="title" id="title" th:field="*{title}"/>
+                </label>
+            </p>
+            <p class="form-group">
+                <label for="content">Content:
+                    <br/>
+                    <textarea class="form-control" rows="10" type="text" name="content" id="content" th:field="*{content}"></textarea>
+                </label>
+            </p>
+            <p>
+                <input class="btn btn-primary" type="submit" value="Update"/>
+            </p>
+        </form>
+        <form th:action="@{/posts/delete}" th:method="POST" th:object="${post}">
+            <input type="hidden" name="id" th:field="*{id}"/>
+            <input type="hidden" name="owner" th:field="*{owner}"/>
+            <input type="hidden" name="title" th:field="*{title}"/>
+            <input type="hidden" name="content" th:field="*{content}"/>
+            <input type="submit" value="Delete Post" class="btn btn-danger"/>
+        </form>
+    </div>
 </body>
 </html>
